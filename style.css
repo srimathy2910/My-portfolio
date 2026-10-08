@@ -1,58 +1,317 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    line-height: 1.6;
-    color: #222;
-    background: white;
+/* =========================
+   CSS VARIABLES
+========================= */
+
+:root {
+    --bg: #f7f8fc;
+    --surface: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #4f46e5;
+    --primary-dark: #3730a3;
+    --border: #e5e7eb;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #111827;
+        --surface: #1f2937;
+        --text: #f9fafb;
+        --muted: #d1d5db;
+        --primary: #818cf8;
+        --primary-dark: #a5b4fc;
+        --border: #374151;
+        --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+}
+
+
+/* =========================
+   GLOBAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+}
+
+
+/* =========================
+   HEADER - FLEXBOX
+========================= */
 
 header {
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
+    padding: 25px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+
+/* =========================
+   NAVIGATION - FLEXBOX
+========================= */
+
 nav {
-    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
 }
 
 nav a {
-    margin-right: 20px;
-    color: #222;
+    padding: 8px 14px;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: 20px;
+    transition: 0.3s;
 }
+
+nav a:hover {
+    color: white;
+    background: var(--primary);
+}
+
+
+/* =========================
+   MAIN - CSS GRID
+========================= */
 
 main {
-    max-width: 900px;
+    width: min(1100px, 92%);
     margin: auto;
-    padding: 30px;
+    padding: 50px 0;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
 }
 
-section,
-article,
-aside {
-    margin-bottom: 30px;
+
+/* =========================
+   SECTIONS
+========================= */
+
+section {
+    padding: 30px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+section h2 {
+    margin-top: 0;
+    color: var(--primary);
+    font-size: 1.6rem;
+}
+
+section p {
+    color: var(--muted);
+}
+
+
+/* =========================
+   SKILLS / INTERESTS
+========================= */
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   PROJECT ARTICLES
+========================= */
+
+article {
+    padding: 22px;
+    margin-bottom: 20px;
+
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+article:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+article h3 {
+    margin-top: 0;
+    color: var(--primary);
+}
+
+
+/* =========================
+   LINKS
+========================= */
+
+a {
+    color: var(--primary);
+}
+
+main a {
+    font-weight: bold;
+}
+
+
+/* =========================
+   CONTACT FORM
+========================= */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 input,
 textarea {
     width: 100%;
-    max-width: 500px;
-    padding: 10px;
-    margin-top: 5px;
+    max-width: 600px;
+    padding: 12px;
+
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+textarea {
+    resize: vertical;
 }
 
 button {
-    padding: 10px 20px;
+    width: fit-content;
+    padding: 12px 24px;
+
+    font: inherit;
+    font-weight: bold;
+
+    color: white;
+    background: var(--primary);
+
+    border: none;
+    border-radius: 8px;
+
     cursor: pointer;
+    transition: 0.3s;
 }
+
+button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   ACCESSIBILITY
+========================= */
 
 a:focus,
 button:focus,
 input:focus,
 textarea:focus {
-    outline: 3px solid blue;
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
 }
 
+
+/* =========================
+   FOOTER
+========================= */
+
 footer {
-    padding: 20px;
-    border-top: 1px solid #ccc;
+    padding: 25px 20px;
+    text-align: center;
+
+    color: var(--muted);
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (min-width: 600px) {
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 40px;
+    }
+
+    main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    section:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 900px) {
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    main {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 35px;
+    }
+
+    section:first-child {
+        grid-column: 1 / -1;
+        padding: 50px;
+    }
 }
